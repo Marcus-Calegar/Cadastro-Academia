@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Cadastro</title>
+    <title>Cadastro de Aluno</title>
 </head>
 
 <body>
@@ -17,6 +17,7 @@
         $UF = json_decode(file_get_contents($urlApiUF));
         return $UF;
     }
+    session_start();
 
     $resultadoUF = apiUF();
     $arrayModalides = array("Musculação", "Natação", "Pilates", "Futebol");
@@ -82,19 +83,25 @@
                 </select>
             </div>
         </div>
-        <input type="submit" class="btn btn-primary">
+        <input type="submit" class="btn btn-primary" id="btnInserir" onclick="SessaoInsert()">
         <button type="button" class="btn btn-primary">
             <a href="../trabalho crud/view/dados.php" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Tabela</a>
         </button>
         <button type="button" class="btn btn-primary" id="btnApagar" onclick="limparCampos()">Limpar Campos</button>
     </form>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
         function limparCampos() {
             document.getElementById("cadastroForm").reset();
         }
+        var btnInserir = document.getElementById("btnInserir");
+        btnInserir.addEventListener("click", function() {
+            <?php
+            $_SESSION['Inserir'] = true;
+            ?>
+        });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

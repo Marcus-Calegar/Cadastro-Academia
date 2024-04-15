@@ -3,6 +3,15 @@ require_once 'FabricadorConexoes.php';
 require_once '../controller/ControllerAluno.php';
 class Aluno
 {
+    public function ValidarPOST($post)
+    {
+        foreach ($post as $value) {
+            if (empty($value)) {
+                return false;
+            }
+        }
+        return true;
+    }
     public function Inserir()
     {
         try {
@@ -10,16 +19,21 @@ class Aluno
             $conexao->__construct();
 
             $aluno = new ControllerAluno();
-            $aluno->setNome($_POST['nome']);
-            $aluno->setEmail($_POST['email']);
-            $aluno->setSexo($_POST['sexo']);
-            $aluno->setEndereco($_POST['endereco']);
-            $aluno->setNumeroCasa($_POST['numeroCasa']);
-            $aluno->setComplemento($_POST['complemento']);
-            $aluno->setBairro($_POST['bairro']);
-            $aluno->setCidade($_POST['cidade']);
-            $aluno->setUF($_POST['uf']);
-            $aluno->setModalidade($_POST['modalidade']);
+            $validar = new Aluno();
+            if ($validar->ValidarPOST($_POST)) {
+                $aluno->setNome($_POST['nome']);
+                $aluno->setEmail($_POST['email']);
+                $aluno->setSexo($_POST['sexo']);
+                $aluno->setEndereco($_POST['endereco']);
+                $aluno->setNumeroCasa($_POST['numeroCasa']);
+                $aluno->setComplemento($_POST['complemento']);
+                $aluno->setBairro($_POST['bairro']);
+                $aluno->setCidade($_POST['cidade']);
+                $aluno->setUF($_POST['uf']);
+                $aluno->setModalidade($_POST['modalidade']);
+            } else {
+                return false;
+            }
 
             $sql = "INSERT INTO Aluno (nome, email, sexo, endereco, numeroCasa, complemento, bairro, cidade, uf, modalidade) VALUES (:nome, :email, :sexo, :endereco, :numeroCasa, :complemento, :bairro, :cidade, :uf, :modalidade)";
             $resultado = $conexao->preparar($sql);
@@ -47,6 +61,7 @@ class Aluno
             $resultado->bindParam(':modalidade', $modalidade);
 
             $resultado->execute();
+            return true;
         } catch (\Throwable $th) {
             throw $th;
         } finally {
@@ -92,20 +107,25 @@ class Aluno
             $conexao->__construct();
 
             $aluno = new ControllerAluno();
-            $aluno->setNome($_POST['nome']);
-            $aluno->setEmail($_POST['email']);
-            $aluno->setSexo($_POST['sexo']);
-            $aluno->setEndereco($_POST['endereco']);
-            $aluno->setNumeroCasa($_POST['numeroCasa']);
-            $aluno->setComplemento($_POST['complemento']);
-            $aluno->setBairro($_POST['bairro']);
-            $aluno->setCidade($_POST['cidade']);
-            $aluno->setUF($_POST['uf']);
-            $aluno->setModalidade($_POST['modalidade']);
-            
+            $validar = new Aluno();
+            if ($validar->ValidarPOST($_POST)) {
+                $aluno->setNome($_POST['nome']);
+                $aluno->setEmail($_POST['email']);
+                $aluno->setSexo($_POST['sexo']);
+                $aluno->setEndereco($_POST['endereco']);
+                $aluno->setNumeroCasa($_POST['numeroCasa']);
+                $aluno->setComplemento($_POST['complemento']);
+                $aluno->setBairro($_POST['bairro']);
+                $aluno->setCidade($_POST['cidade']);
+                $aluno->setUF($_POST['uf']);
+                $aluno->setModalidade($_POST['modalidade']);
+            } else {
+                return false;
+            }
+
             $sql = "UPDATE Aluno SET nome = :nome, email = :email, sexo = :sexo, endereco = :endereco, numeroCasa = :numeroCasa, complemento = :complemento, bairro = :bairro, cidade = :cidade, uf = :uf, modalidade = :modalidade WHERE id = :id";
             $resultado = $conexao->preparar($sql);
-            
+
             $nome = $aluno->getNome();
             $email = $aluno->getEmail();
             $sexo = $aluno->getSexo();

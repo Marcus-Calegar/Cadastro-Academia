@@ -8,21 +8,24 @@
     <title>Atualizar</title>
 </head>
 
-<body>
+<body onload="Alerta()">
     <?php
     require_once '../model/Aluno.php';
     $aluno = new Aluno();
     $id = $_POST['id'];
+    $mensagem;
     if (null !== $aluno->Atualizar($id)) {
-        echo "Atualizacao bem sucedida!";
+        $mensagem = "Atualizacao bem sucedida!";
     } else {
-        echo "Erro ao atualizar!";
+        $mensagem = "Erro ao atualizar!";
     }
-    unset($_POST, $id);
     ?>
-    <button type="button" class="btn btn-primary">
-        <a href="../index.php" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Voltar</a>
-    </button>
+    <script>
+        function Alerta() {
+            var msg = alert("<?= $mensagem ?>");
+            window.location.href = "../index.php"
+        }
+    </script>
 </body>
 
 </html>

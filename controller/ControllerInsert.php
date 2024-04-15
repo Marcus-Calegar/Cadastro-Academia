@@ -8,20 +8,27 @@
     <title>Inserir</title>
 </head>
 
-<body>
+<body onload="Alerta()">
     <?php
-    include_once '../model/Aluno.php';
+    require_once '../model/Aluno.php';
     $aluno = new Aluno();
-    if($aluno->inserir()){
-        echo "Insert bem sucedido!";
-        unset($_POST);
-    }else{
-        echo "Erro ao inserir!";
+    $mensagem;
+    session_start();
+    if (isset($_SESSION['Inserir']) && $_SESSION['Inserir'] == true) {
+        if ($aluno->inserir()) {
+            $mensagem = "Insert bem sucedido!";
+        } else {
+            $mensagem = "Erro ao inserir!";
+        }
+        unset($_SESSION['Inserir']);
     }
     ?>
-    <button type="button" class="btn btn-primary">
-        <a href="../index.php" class="link-light link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Voltar</a>
-    </button>
+    <script>
+        function Alerta() {
+            var msg = alert("<?= $mensagem ?>");
+            window.location.href = "../index.php"
+        }
+    </script>
 </body>
 
 </html>

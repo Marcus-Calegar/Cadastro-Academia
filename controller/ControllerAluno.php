@@ -13,7 +13,7 @@ class ControllerAluno
     private $cidade;
     private $uf;
     private $modalidade;
-
+    
     public function getId()
     {
         return $this->id;
