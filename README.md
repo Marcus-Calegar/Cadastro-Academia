@@ -27,6 +27,6 @@ Este é o meu primeiro projeto desenvolvido em PHP utilizando o padrão de arqui
 ### Configuração
 
 1. Faça o download ou clone este repositório para o diretório raiz do seu servidor web.
-2. Importe o arquivo SQL fornecido (`database.sql`) para criar a estrutura do banco de dados.
+2. Importe o arquivo SQL fornecido (`script.sql`) para criar a estrutura do banco de dados.
 3. Configure as credenciais do banco de dados no arquivo `config/database.php`.
 4. Inicie o servidor web e acesse o sistema através do navegador.
