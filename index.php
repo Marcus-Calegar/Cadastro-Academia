@@ -24,7 +24,7 @@
 
     ?>
 
-    <form method="post" action="../trabalho crud/controller/ControllerInsert.php" class="text-center my-auto" id="cadastroForm">
+    <form method="post" action="controller/ControllerInsert.php" class="text-center my-auto" id="cadastroForm">
         <h1>Cadastro de Aluno</h1>
         <div class="container justify-content-center">
             <div class="row my-2">
